@@ -1,29 +1,40 @@
-/* Base Reset & Fonts */
-body {
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f9fafb;
-  color: #1f2937;
+  padding: 0;
 }
 
-header {
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+header.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 10px;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
 .logo img {
@@ -31,22 +42,8 @@ header {
   height: 32px;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.search-input {
-  padding: 0.4rem 0.8rem;
-  border: 1px solid #d1d5db;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #2563eb;
+.nav a {
+  margin-left: 20px;
   font-weight: 500;
 }
 
@@ -55,85 +52,43 @@ main {
 }
 
 .section {
-  max-width: 1000px;
-  margin: 0 auto 3rem auto;
-}
-
-.section h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .projects {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
 }
 
 .project {
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  min-width: 200px;
-  text-decoration: none;
-  color: inherit;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1rem;
+  text-align: center;
   transition: transform 0.2s ease;
 }
 
 .project:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
 }
 
 .project img {
   width: 100%;
-  height: 130px;
+  height: 140px;
   object-fit: cover;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-.project h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0.5rem;
-}
-
-.project p {
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin: 0 0.5rem 0.75rem;
-}
-
-.leaderboard {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  gap: 1rem;
-}
-
-.leader {
-  text-align: center;
-}
-
-.leader img {
-  width: 56px;
-  height: 56px;
-  border-radius: 9999px;
+  border-radius: 8px;
   margin-bottom: 0.5rem;
-}
-
-.leader span {
-  font-weight: 600;
-  display: block;
 }
 
 .modal {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,46 +99,34 @@ main {
 }
 
 .modal-content {
-  background: white;
+  background: #fff;
   padding: 2rem;
-  border-radius: 1rem;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
 }
 
 .modal-content input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
-.modal-content button[type="submit"] {
-  background: #2563eb;
-  color: white;
-  padding: 0.5rem;
+.modal-content button {
+  padding: 0.8rem;
+  width: 100%;
+  background: #f16529;
+  color: #fff;
   border: none;
-  border-radius: 0.5rem;
-  font-weight: 600;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.modal-content button[type="submit"]:hover {
-  background: #1d4ed8;
 }
 
 .close-modal {
-  background: none;
-  border: none;
-  font-size: 0.875rem;
-  color: #6b7280;
-  text-decoration: underline;
-  cursor: pointer;
-  align-self: flex-end;
+  margin-top: 1rem;
+  background: #e0e0e0;
+  color: #333;
 }
-
