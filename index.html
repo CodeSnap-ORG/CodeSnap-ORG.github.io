@@ -2,29 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CodeSnap</title>
-  <link rel="stylesheet" href="static/main.css">
+  <link rel="stylesheet" href="static/main.css" />
+  <link rel="stylesheet" href="static/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
+  <header class="navbar">
     <div class="logo">
-      <img src="https://u.cubeupload.com/UploadMaster/1000003131.png" alt="CodeSnap Logo">
+      <img src="https://u.cubeupload.com/UploadMaster/1000003131.png" alt="CodeSnap Logo" />
       <span>CodeSnap</span>
     </div>
-    <nav class="nav-links">
-      <input type="text" placeholder="Search..." class="search-input">
-      <a href="#" id="loginBtn">Login</a>
+    <nav class="nav">
+      <a href="#">Create</a>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
       <a href="#" id="signupBtn">Sign Up</a>
+      <a href="#" id="loginBtn">Login</a>
     </nav>
   </header>
+
   <main>
+    <section class="daily-section">
+      <h2>CodeSnap Daily</h2>
+      <div class="daily-card">
+        <img src="https://u.cubeupload.com/UploadMaster/1000003131.png" alt="CT Daily Icon" />
+        <h3>CT Daily</h3>
+      </div>
+    </section>
+
     <section class="section">
       <h2>Featured Projects</h2>
       <div class="projects" id="projectsContainer"></div>
     </section>
-    <section class="section">
+
+    <section class="leaderboard-section">
       <h2>Leaderboard</h2>
       <div class="leaderboard" id="leaderboardContainer"></div>
     </section>
@@ -140,7 +153,7 @@
       leadData.slice(0, 3).forEach((user, i) => {
         const div = document.createElement('div');
         div.className = 'leader';
-        div.innerHTML = `<img src="${user.avatar}" alt="${user.name}" /><span>${user.name}</span>`;
+        div.innerHTML = `<img src="${user.avatar}" alt="${user.name}" /><span>${i + 1}</span>`;
         leaderboardContainer.appendChild(div);
       });
     };
