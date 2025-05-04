@@ -92,5 +92,13 @@
     <h1>404 - Page Not Found! </h1>
     <a href="/" class="home-button">Go to Home</a>
   </main>
+<script>
+  const url = window.location.href;
+  const local = window.location.pathname;
+  if (local.includes('projects')) {
+    let last_part = url.substring(url.lastIndexOf('/') + 1);
+    window.location.href = `https://codesnap-org.github.io/projects/#${last_part}`;
+  }
+</script>
 </body>
 </html>
