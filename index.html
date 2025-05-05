@@ -130,7 +130,7 @@
         if (data.username) alert(`Welcome back, ${data.username}!`);
       }
 
-      const projRes = await fetch('/api/projects');
+      const projRes = await fetch('https://block-compiler-codesnap.onrender.com/api/projects');
       const projData = await projRes.json();
       projData.slice(-20).forEach(p => {
         const div = document.createElement('a');
