@@ -134,7 +134,7 @@
         }
 
         // Fetch and display projects
-        const projRes = await fetch('https://block-compiler-codesnap.onrender.com/api/projects');
+        const projRes = await fetch('https://corsproxy.io/?url=https://block-compiler-codesnap.onrender.com/api/projects');
         const projData = await projRes.json();
         if (projRes.status_code == 404) {
           alert('Error!');
