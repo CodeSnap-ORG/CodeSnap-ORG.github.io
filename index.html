@@ -144,11 +144,12 @@
         projData.projects.forEach(p => {
           const div = document.createElement('a');
           div.className = 'project';
+          p.link.replace('.sb3', '')
           div.href = p.link;
           div.innerHTML = `
             <img src="${p.image}" alt="${p.name}" />
             <h3>${p.name}</h3>
-            <p>${p.genre}</p>`;
+            <p>Genre: ${p.genre}</p>`;
           projectsContainer.appendChild(div);
         });
 
