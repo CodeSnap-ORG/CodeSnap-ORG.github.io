@@ -158,3 +158,10 @@ button.submit-reply {
   padding: 5px 10px;
 }
 
+input { 
+  width: 90%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 3px solid #ddd;
+  border-radius: 8px;
+}
