@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CodeTorch Project</title>
+  <title>CodeSnap</title>
   <link rel="stylesheet" href="../static/main.css" />
   <link rel="stylesheet" href="../static/home.css" />
 </head>
@@ -26,123 +26,124 @@
     </section>
   </div>
 
-
   <script>
-  window.onload = async function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+    window.onload = async function () {
+      const id = window.location.hash.slice(1); // Get ID from # fragment
 
-    const iframe = document.getElementById('id-frame');
-    iframe.src = `https://codesnap-org.github.io/projects/embed?project_url=https://block-compiler-codesnap.onrender.com/projects/${id}/&credits=Test&author=Hi`;
+      const iframe = document.getElementById('id-frame');
+      iframe.src = `https://codesnap-org.github.io/projects/embed?project_url=https://block-compiler-codesnap.onrender.com/projects/${id}/&credits=Test&author=Hi`;
 
-    const username = localStorage.getItem("username");
-    const commentForm = document.getElementById('comment-form');
-    const commentTextInput = document.getElementById('comment-text');
-    const commentsContainer = document.getElementById('comments-container');
-    const statusText = document.getElementById('comment-status');
+      const username = localStorage.getItem("username");
+      const commentForm = document.getElementById('comment-form');
+      const commentTextInput = document.getElementById('comment-text');
+      const commentsContainer = document.getElementById('comments-container');
+      const statusText = document.getElementById('comment-status');
 
-    // Disable commenting if no username
-    if (!username) {
-      commentForm.style.display = "none";
-      statusText.textContent = "You must be logged in to comment.";
-    }
+      if (!username) {
+        commentForm.style.display = "none";
+        statusText.textContent = "You must be logged in to comment.";
+      }
 
-    // Load and render comments
-    function loadComments() {
-      fetch(`https://corsproxy.io/?url=https://block-compiler-codesnap.onrender.com/api/comments/${id}`)
-        .then(res => res.json())
-        .then(data => {
-          commentsContainer.innerHTML = '';
-          if (!Array.isArray(data) || data.length === 0) {
-            commentsContainer.textContent = "No comments yet.";
-          } else {
-            data.forEach(comment => {
-              renderComment(comment, commentsContainer);
-            });
-          }
-        })
-        .catch(() => {
-          commentsContainer.textContent = "Failed to load comments.";
-        });
-    }
-
-    // Render a single comment (and its replies)
-    function renderComment(comment, parentElement, indent = 0) {
-      const commentDiv = document.createElement('div');
-      commentDiv.classList.add('comment');
-      commentDiv.style.marginLeft = `${indent}px`;
-
-      commentDiv.innerHTML = `
-        <p><strong>${comment.username || 'Anonymous'}:</strong></p>
-        <p>${comment.text}</p>
-        <button class="reply-btn">Reply</button>
-        <div class="replies"></div>
-      `;
-      parentElement.appendChild(commentDiv);
-
-      const replyBtn = commentDiv.querySelector('.reply-btn');
-      const repliesDiv = commentDiv.querySelector('.replies');
-
-      replyBtn.addEventListener('click', () => {
-        if (!username) {
-          alert("You must be logged in to reply.");
-          return;
-        }
-
-        const replyBox = document.createElement('div');
-        replyBox.innerHTML = `
-          <textarea placeholder="Write a reply..." class="reply-text"></textarea>
-          <button class="submit-reply">Post Reply</button>
-        `;
-        replyBtn.style.display = 'none';
-        commentDiv.appendChild(replyBox);
-
-        const replyText = replyBox.querySelector('.reply-text');
-        const submitBtn = replyBox.querySelector('.submit-reply');
-
-        submitBtn.addEventListener('click', () => {
-          const text = replyText.value.trim();
-          if (!text) return;
-
-          fetch(`https://block-compiler-codesnap.onrender.com/api/comments/${id}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, text, parentId: comment.id })
-          })
-          .then(res => {
-            if (res.ok) {
-              loadComments();
+      function loadComments() {
+        fetch(`https://corsproxy.io/?url=https://block-compiler-codesnap.onrender.com/api/comments/${id}`)
+          .then(res => res.json())
+          .then(data => {
+            commentsContainer.innerHTML = '';
+            if (!Array.isArray(data) || data.length === 0) {
+              commentsContainer.textContent = "No comments yet.";
             } else {
-              alert("Failed to post reply.");
+              data.forEach(comment => {
+                renderComment(comment, commentsContainer);
+              });
             }
+          })
+          .catch(() => {
+            commentsContainer.textContent = "Failed to load comments.";
           });
+      }
+
+      function renderComment(comment, parentElement, indent = 0) {
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.style.marginLeft = `${indent}px`;
+
+        commentDiv.innerHTML = `
+          <p><strong>${comment.username || 'Anonymous'}:</strong></p>
+          <p>${comment.text}</p>
+          <button class="reply-btn">Reply</button>
+          <div class="replies"></div>
+        `;
+        parentElement.appendChild(commentDiv);
+
+        const replyBtn = commentDiv.querySelector('.reply-btn');
+        const repliesDiv = commentDiv.querySelector('.replies');
+
+        replyBtn.addEventListener('click', () => {
+          if (!username) {
+            alert("You must be logged in to reply.");
+            return;
+          }
+
+          const replyBox = document.createElement('div');
+          replyBox.innerHTML = `
+            <textarea placeholder="Write a reply..." class="reply-text"></textarea>
+            <button class="submit-reply">Post Reply</button>
+          `;
+          replyBtn.style.display = 'none';
+          commentDiv.appendChild(replyBox);
+
+          const replyText = replyBox.querySelector('.reply-text');
+          const submitBtn = replyBox.querySelector('.submit-reply');
+
+          submitBtn.addEventListener('click', () => {
+            const text = replyText.value.trim();
+            if (!text) return;
+
+            fetch(`https://block-compiler-codesnap.onrender.com/api/comments/${id}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, text, parentId: comment.id })
+            })
+            .then(res => {
+              if (res.ok) {
+                loadComments();
+              } else {
+                alert("Failed to post reply.");
+              }
+            });
+          });
+        });
+
+        if (Array.isArray(comment.replies)) {
+          comment.replies.forEach(reply => {
+            renderComment(reply, repliesDiv, indent + 20);
+          });
+        }
+      }
+
+      commentForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const text = commentTextInput.value.trim();
+        if (!text || !username) return;
+
+        fetch(`https://block-compiler-codesnap.onrender.com/api/comments/${id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, text })
+        })
+        .then(res => {
+          if (res.ok) {
+            commentTextInput.value = '';
+            statusText.textContent = "Comment posted!";
+            loadComments();
+          } else {
+            statusText.textContent = "Failed to post comment.";
+          }
         });
       });
 
-      // Render nested replies if any
-      if (Array.isArray(comment.replies)) {
-        comment.replies.forEach(reply => {
-          renderComment(reply, repliesDiv, indent + 20);
-        });
-      }
-    }
-
-    // Submit new top-level comment
-    commentForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const text = commentTextInput.value.trim();
-      if (!text || !username) return;
-
-      fetch(`https://block-compiler-codesnap.onrender.com/api/comments/${id}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, text })
-      })
-      .then(res => {
-        if (res.ok) {
-          commentTextInput.value = '';
-          statusText.textContent = "Comment posted!";
-          load
-  }
-        </script>
-</body></html>
+      loadComments();
+    };
+  </script>
+</body>
+</html>
