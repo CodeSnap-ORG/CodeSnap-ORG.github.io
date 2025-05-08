@@ -10,7 +10,7 @@
 <body>
   <div class="container">
     <!-- Project Display -->
-    <iframe id="iframe" src="#" width="800" height="600"></iframe>
+    <iframe id="id-frame" src="#" width="800" height="600"></iframe>
 
     <!-- Comments Section -->
     <section id="comments-section">
@@ -32,8 +32,8 @@
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
 
-    const iframe = document.getElementById('iframe');
-    iframe.src = `https://turbowarp.org/embed?project_url=https://corsproxy.io/?url=https://block-compiler-codesnap.onrender.com/projects/${id}`;
+    const iframe = document.getElementById('id-frame');
+    iframe.src = `https://codesnap-org.github.io/projects/embed?project_url=https://block-compiler-codesnap.onrender.com/projects/${id}`;
 
     const username = localStorage.getItem("username");
     const commentForm = document.getElementById('comment-form');
