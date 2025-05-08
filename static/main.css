@@ -158,7 +158,7 @@ button.submit-reply {
   padding: 5px 10px;
 }
 
-input { 
+textarea { 
   width: 90%;
   padding: 1rem;
   margin-bottom: 1rem;
