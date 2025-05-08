@@ -11,7 +11,7 @@
 <body>
   <header class="navbar">
     <div class="logo">
-      <img src="https://codesnap-org.github.io/projects/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg" alt="CodeSnap Logo" />
+      <img src="https://codesnap-org.github.io/gui/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg" alt="CodeSnap Logo" />
       <span>CodeSnap</span>
     </div>
     <nav class="nav">
@@ -146,8 +146,14 @@
           div.className = 'project';
           const link2 = p.link.replace('.sb3', '')
           div.href = link2;
+          if(p.image === 'https://codesnap-org.github.io/projects/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg') {
+            const image = 'https://codesnap-org.github.io/projects/static/assets/018f79360b10f9f2c317d648d61a0eb2.svg';
+          } else {
+            const image = p.image;
+          }
           div.innerHTML = `
-            <img src="${p.image}" alt="${p.name}" />
+
+            <img src="${image}" alt="${p.name}" />
             <h3>${p.name}</h3>
             <p>Genre: ${p.genre}</p>`;
           projectsContainer.appendChild(div);
