@@ -45,7 +45,7 @@
       }
 
       function loadComments() {
-        fetch(`https://corsproxy.io/?url=https://block-compiler-codesnap.onrender.com/api/comments/${id}`)
+        fetch(`https://block-compiler-codesnap.onrender.com/api/comments/${id}`)
           .then(res => res.json())
           .then(data => {
             commentsContainer.innerHTML = '';
