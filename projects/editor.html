@@ -1,2 +1,32 @@
-<script>
-  window.location.href = 'https://codesnap-org.github.io/gui/editor.html'</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="iframe" src="https://codesnap-org.github.io/gui/editor.html"></iframe>
+  <script>
+    window.onload = function() {
+      const id = window.location.hash.slice(1);
+      if (id) {
+        document.getElementById('iframe').src = `https://codesnap-org.github.io/gui/editor.html?project_url=https://block-compiler-codesnap.onrender.com/projects/${id}`;
+      }
+    };
+  </script>
+</body>
+</html>
