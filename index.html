@@ -89,7 +89,7 @@
 
     const res = await fetch('https://block-compiler-codesnap.onrender.com/api/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorisation': 'test123' },
       body: JSON.stringify({ email, password })
     });
 
@@ -112,7 +112,7 @@
 
     const res = await fetch('https://block-compiler-codesnap.onrender.com/api/join', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorisation': 'test123' },
       body: JSON.stringify({ username, email, password, img })
     });
 
