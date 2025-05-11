@@ -87,7 +87,7 @@
     const email = e.target.loginEmail.value;
     const password = e.target.loginPassword.value;
 
-    const res = await fetch('/api/login', {
+    const res = await fetch('https://block-compiler-codesnap.onrender.com/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -110,7 +110,7 @@
     const password = e.target.signupPassword.value;
     const img = 'https://u.cubeupload.com/UploadMaster/1000003131.png';
 
-    const res = await fetch('/api/join', {
+    const res = await fetch('https://block-compiler-codesnap.onrender.com/api/join', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password, img })
@@ -151,7 +151,7 @@
         const number = match ? match[0] : '0';
 
         // Set the new formatted link
-        p.link = `https://codesnap-org.github.io/projects/#${number}`;
+        const newLink = `https://codesnap-org.github.io/projects/#${number}`;
         div.href = p.link;
 
         // Fallback image logic
@@ -169,7 +169,7 @@
       });
 
       // Fetch and display leaderboard
-      const leadRes = await fetch('/api/leaderboard');
+      const leadRes = await fetch('https://block-compiler-codesnap.onrender.com/api/leaderboard');
       const leadData = await leadRes.json();
       leadData.slice(0, 3).forEach((user, i) => {
         const div = document.createElement('div');
